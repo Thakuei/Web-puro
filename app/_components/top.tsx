@@ -1,7 +1,7 @@
 'use client'
 
 import { supabase } from '@/utils/supabaseClient';
-import { Box, Table, Text, Tbody, Tr, Td, Th, Thead } from '@chakra-ui/react';
+import { Box, Table, Text, Tbody, Tr, Td, Th, Thead, Button } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 
 interface Post {
@@ -29,6 +29,18 @@ export default function Top() {
     }
   };
 
+  const deletePost = async (id: number) => {
+    try {
+      const { error } = await supabase.from("Post").delete().match({ id });
+      if (error) throw error;
+
+      setPosts(posts.filter(post => post.id !== id));
+    } catch (error) {
+      alert((error as Error).message);
+    }
+  }
+
+
   return (
     <>
       <Box>
@@ -41,6 +53,7 @@ export default function Top() {
                 <Th>タイトル</Th>
                 <Th>内容</Th>
                 <Th>投稿日</Th>
+                <Th>削除</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -50,6 +63,9 @@ export default function Top() {
                   <Td>{post.title}</Td>
                   <Td>{post.description}</Td>
                   <Td>{new Date(post.createdAt).toLocaleString()}</Td>
+                  <Td>
+                    <Button bgColor={'cyan.100'} _hover={{bgColor: 'cyan.300'}} onClick={() => deletePost(post.id)}>削除</Button>
+                  </Td>
                 </Tr>
               ))}
             </Tbody>
