@@ -3,7 +3,7 @@
 import { supabase } from '@/utils/supabaseClient';
 import { useState, useEffect } from 'react';
 import React from "react"
-import { Button, Box, Input, Text, Textarea } from '@chakra-ui/react';
+import { Button, Box, Input, Text, Textarea, Center } from '@chakra-ui/react';
 
 
 export default function Home() {
@@ -31,25 +31,27 @@ export default function Home() {
 
   return (
     <>
+    <Center>
       <Box pt={30}>
         <Box as="form" onSubmit={addPost}>
           <Box>
-            <Text>タイトル</Text>
+            <Text fontSize={14} fontWeight={"bold"}>タイトル</Text>
               <Input
                 type="text"
                 value={newTitle}
-                width={60}
+                width={72}
                 onChange={(e) => setNewTitle(e.target.value)} />
             </Box>
             <Box>
-              <Text>内容</Text>
-              <Textarea value={newDescription} rows={2} width={60} resize={"none"}  onChange={(e) => setNewDescription(e.target.value)}/>
+              <Text fontSize={14} pt={3} fontWeight={"bold"}>内容</Text>
+              <Textarea value={newDescription} rows={2} width={72} resize={"none"} fontSize={14} onChange={(e) => setNewDescription(e.target.value)}/>
             </Box>
-            <Box>
+            <Box pt={3} textAlign={"center"}>
               <Button type="submit">登録</Button>
             </Box>
         </Box>
       </Box>
+    </Center>
     </>
   )
 }
