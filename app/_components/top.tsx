@@ -45,7 +45,7 @@ export default function Top() {
     <>
       <Box>
         <Text textAlign={"center"} fontWeight={"bold"} mt={10}>投稿スレッド</Text>
-        <Box overflowY={"auto"} maxH={40}>
+        <Box overflowY={"auto"} maxH={60}>
           <Table>
             <Thead>
               <Tr>

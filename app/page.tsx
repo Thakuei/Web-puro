@@ -2,11 +2,12 @@
 
 import React, { useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
-import { Box, Flex, Text, Input, Center, Button, Link } from '@chakra-ui/react';
+import { Box, Flex, Text, Input, Center, Button, Link, useToast } from '@chakra-ui/react';
 import { useRouter } from "next/navigation";
 
 function SignUp() {
-  const router = useRouter()
+  const toast = useToast()
+  // const router = useRouter()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [passwordConf, setPasswordConf] = useState("")
@@ -19,7 +20,14 @@ function SignUp() {
     })
     if (error) {
       throw error;
-    }
+    } else {
+      toast({title: "サインアップ成功",
+      description: "確認メールをおくりました確認お願いします。",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+      position: "top",
+    });
   }
   return (
       <section>
@@ -77,7 +85,8 @@ function SignUp() {
         </Box>
         </form>
       </section>
-  )
+    )
+  }
 }
 
 export default SignUp;

@@ -15,7 +15,7 @@ export default function Logout() {
       if (logoutError) {
         throw logoutError;
       }
-      await router.push("/signup");
+      await router.push("/");
     }catch{
       alert('エラーが発生しました');
     }
